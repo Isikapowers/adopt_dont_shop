@@ -1,0 +1,42 @@
+<%= form_with model: model, method: method, local: true do |f| %>
+
+  <p>
+    <%= f.label :applicant_name, "Name: " %>
+    <%= f.text_field :applicant_name %>
+  </p>
+  <p>
+    <%= f.label :applicant_street_address, "Street Address: "%>
+    <%= f.text_field :applicant_street_address %>
+  </p>
+  <p>
+    <%= f.label :applicant_city, "City: "%>
+    <%= f.text_field :applicant_city %>
+  </p>
+  <p>
+    <%= f.label :applicant_state, "State: "%>
+    <%= f.text_field :applicant_state %>
+  </p>
+  <p>
+    <%= f.label :applicant_zipcode, "Zipcode: "%>
+    <%= f.text_field :applicant_zipcode %>
+  </p>
+  <p>
+    <%= f.label :description, "Description: "%>
+    <%= f.text_field :description %>
+  </p>
+  <p>
+    <%= f.label :status, "Status: " %>
+    <%= f.text_field :status%>
+  </p<br><br><br>
+
+  <p>
+  <h5>Add Pet(s) to This Application:</h5><br>
+  <h6>Search Pets by Name:</h6>
+  <%= form_with url: "/applications/#{@application.id}?search=name", method: :get, local: true do %>
+  <%= text_field_tag(:search, params[:search]) %>
+  <%= submit_tag ("Search") %>
+  <% end %>
+  </p>
+
+  <%= f.submit "Submit Application" %>
+<% end %>
