@@ -14,6 +14,6 @@
   <%= render partial: 'link', locals: { name: "Edit #{pet.name}", path: "/pets/#{pet.id}/edit", method: :get } %><br>
   <%= render partial: 'link', locals: { name: "Delete #{pet.name}", path: "/pets/#{pet.id}", method: :delete } %>
   <p></p>
-<% end %><br><br>
+<% end %><br>
 
 <%= render partial: 'link', locals: { name: 'New Application', path: "/applications/new", method: :get } %>
