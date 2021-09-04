@@ -2,7 +2,7 @@
 
 <p><%= link_to "Add a Pet", "/shelters/#{@shelter.id}/pets/new" %></p>
 
-<%= link_to "Sort alphabetically", "/shelters/#{@shelter.id}/pets?sort=alphabetical" %><br><br>
+<%= link_to "Sort Alphabetically", "/shelters/#{@shelter.id}/pets?sort=alphabetical" %><br><br>
 
 <%= form_with url: "/shelters/#{@shelter.id}/pets", method: :get do |form| %>
   <%= form.label "Only display pets with an age of at least..." %>
@@ -10,7 +10,7 @@
   <%= form.submit "Filter" %>
 <% end %><br>
 
-<% @shelter_pets.each do |pet| %>
+<% @pets.each do |pet| %>
   <h3><%= pet.name %></h3>
   <p>Age: <%= pet.age %></p>
   <p>Breed: <%= pet.breed %></p>

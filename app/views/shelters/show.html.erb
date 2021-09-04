@@ -1,8 +1,9 @@
-<h1><%= @shelter.name %></h1>
+<h1><%= @shelter.name %></h1><br>
+
 <p>Rank: <%= @shelter.rank %></p>
 <p>City: <%= @shelter.city %></p>
 
-<p class="pet-count">Pets at <%= @shelter.name %>: <%= @shelter.pet_count %></p>
-<p><%= button_to "All pets at #{@shelter.name}", "/shelters/#{@shelter.id}/pets" %></p><br>
+<p class="pet-count">Number of pets: <%= @shelter.pet_count %></p>
+<p><%= link_to "Check Out Our Pets!", "/shelters/#{@shelter.id}/pets" %></p><br>
 
-<p><%= button_to "Delete #{@shelter.name}", "/shelters/#{@shelter.id}", method: :delete %></p>
+<p><%= button_to "Delete #{@shelter.name}", "/shelters/#{@shelter.id}", method: :delete, class: "btn btn-danger" %></p>

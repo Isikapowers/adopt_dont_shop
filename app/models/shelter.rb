@@ -24,11 +24,27 @@ class Shelter < ApplicationRecord
     pets.where(adoptable: true)
   end
 
-  def alphabetical_pets
-    adoptable_pets.order(name: :asc)
+  # def alphabetical_pets
+  #   adoptable_pets.order(name: :asc)
+  # end
+  #
+  # def shelter_pets_filtered_by_age(age_filter)
+  #   adoptable_pets.where('age >= ?', age_filter)
+  # end
+  #
+  # def adoptable_pet_count
+  #   adoptable_pets.count
+  # end
+  #
+  # def average_pet_age
+  #   pets.average(:age).to_i
+  # end
+
+  def adopted_pet_count
+    pets.select("applications.*").joins(:applications).where("applications.status = ?", "Approved").count
   end
 
-  def shelter_pets_filtered_by_age(age_filter)
-    adoptable_pets.where('age >= ?', age_filter)
+  def pets_pending_applications
+    pets.joins(:applications).where("applications.status = ?", "Pending").distinct
   end
 end

@@ -1,6 +1,7 @@
 <h1>All Pets</h1><br>
 
 <%= render partial: 'search', locals: { path: "/pets", method: :get } %><br>
+
 <% @pets.each do |pet| %>
   <h3><%= pet.name %></h3>
   <p>
@@ -10,8 +11,8 @@
     You can find <%= pet.name %> at <%= link_to pet.shelter_name, "/shelters/#{pet.shelter.id}" %>!
   </p>
 
-  <%= render partial: 'link', locals: { name: "Edit #{pet.name}",path: "/pets/#{pet.id}/edit", method: :get } %><br>
-  <%= render partial: 'link', locals: { name: "Delete #{pet.name}",path: "/pets/#{pet.id}", method: :delete } %>
+  <%= render partial: 'link', locals: { name: "Edit #{pet.name}", path: "/pets/#{pet.id}/edit", method: :get } %><br>
+  <%= render partial: 'link', locals: { name: "Delete #{pet.name}", path: "/pets/#{pet.id}", method: :delete } %>
   <p></p>
 <% end %><br><br>
 

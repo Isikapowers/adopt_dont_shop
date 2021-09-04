@@ -1,4 +1,5 @@
 class PetsController < ApplicationController
+
   def index
     if params[:search].present?
       @pets = Pet.search(params[:search])
@@ -13,11 +14,12 @@ class PetsController < ApplicationController
 
   def new
     @shelter = Shelter.find(params[:shelter_id])
-    @pet = @shelter.pets.new(pet_params)
+    # @pet = @shelter.pets.new(pet_params)
   end
 
   def create
     pet = Pet.new(pet_params)
+
     if pet.save
       redirect_to "/shelters/#{pet_params[:shelter_id]}/pets"
     else
@@ -42,7 +44,7 @@ class PetsController < ApplicationController
 
   def destroy
     Pet.find(params[:id]).destroy
-    
+
     redirect_to '/pets'
   end
 
@@ -52,4 +54,5 @@ class PetsController < ApplicationController
   def pet_params
     params.permit(:id, :name, :age, :breed, :adoptable, :shelter_id)
   end
+  
 end

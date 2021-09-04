@@ -4,5 +4,5 @@
 <h3><%= @pet.adoptable %></h3>
 <h3><%= @pet.shelter_name %></h3>
 
-<p><%= button_to "Update #{@pet.name}", "pets/#{@pet.id}/edit", class: "btn btn-secondary" %></p>
-<p><%= button_to "Delete #{@pet.name}", "/pets/#{@pet.id}", method: :delete, class: "btn btn-danger" %></p>
+<%= button_to "Update", "/pets/#{@pet.id}/edit", class: "btn btn-secondary" %>
+<%= button_to "Delete", "/pets/#{@pet.id}", method: :delete, class: "btn btn-danger" %>

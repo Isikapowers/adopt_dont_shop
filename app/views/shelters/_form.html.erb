@@ -1,0 +1,19 @@
+<%= form_with url: path, method: method, local: true do |f| %>
+  <p>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :city %>
+    <%= f.text_field :city %>
+  </p>
+  <p>
+    <%= f.label :foster_program %>
+    <%= f.check_box :foster_program %>
+  </p>
+  <p>
+    <%= f.label :rank %>
+    <%= f.number_field :rank %>
+  </p>
+  <%= f.submit %>
+<% end %>

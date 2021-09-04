@@ -1,7 +1,7 @@
 <h3>All Applications</h3><br>
 
 <% @applications.each do |application| %>
-  <ol>
+  <ul>
     <li><%= link_to "Name: #{application.applicant_name}", "/applications/#{application.id}" %></li>
-  </ol>
+  </ul>
 <% end %>

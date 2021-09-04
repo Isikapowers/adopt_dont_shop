@@ -20,23 +20,7 @@
     <%= f.label :applicant_zipcode, "Zipcode: "%>
     <%= f.text_field :applicant_zipcode %>
   </p>
-  <p>
-    <%= f.label :description, "Description: "%>
-    <%= f.text_field :description %>
-  </p>
-  <p>
-    <%= f.label :status, "Status: " %>
-    <%= f.text_field :status%>
-  </p<br><br><br>
+    <%= f.hidden_field :status, value: "In Progress" %>
 
-  <p>
-  <h5>Add Pet(s) to This Application:</h5><br>
-  <h6>Search Pets by Name:</h6>
-  <%= form_with url: "/applications/#{@application.id}?search=name", method: :get, local: true do %>
-  <%= text_field_tag(:search, params[:search]) %>
-  <%= submit_tag ("Search") %>
-  <% end %>
-  </p>
-
-  <%= f.submit "Submit Application" %>
+    <%= f.submit "Submit Application" %>
 <% end %>
