@@ -22,14 +22,14 @@
 
 <% if @application.status == "In Progress" %>
   <h5>Add Pets to Adopt:</h5>
-  <%= render partial: "search", locals: { path: application_path, method: :get } %>
+  <%= render partial: "search", locals: { path: "/applications/#{@application.id}", method: :get } %>
 <% end  %>
 
 <% if params[:search] %>
   <% @pets.each do |pet| %>
   <section id="Pet-<%= pet.id %>">
   <h5>
-    <%= render partial: "link", locals: { name: "#{pet.name}", path: pet_path, method: :get } %>
+    <%= render partial: "link", locals: { name: "#{pet.name}", path: "pets/#{pet.id}", method: :get } %>
     <%= button_to "Adopt this Pet", { controller: "pet_applications", action: :create, pet_id: :pet.id } , method: :post %>
   </h5>
     <p><%= pet.age %> years old</p>

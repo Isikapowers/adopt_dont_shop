@@ -42,7 +42,7 @@ RSpec.describe 'the shelter update' do
       click_button 'Save'
 
       expect(page).to have_content("Error: Name can't be blank")
-      expect(page).to have_current_path(edit_shelter_path(shelter.id))
+      expect(page).to have_current_path("/shelters/#{shelter.id}")
     end
   end
 end

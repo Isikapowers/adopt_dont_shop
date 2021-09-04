@@ -2,6 +2,6 @@
 
 <% @applications.each do |application| %>
   <ol>
-    <li><%= link_to "Name: #{application.applicant_name}", applications_path %></li>
+    <li><%= link_to "Name: #{application.applicant_name}", "/applications/#{application.id}" %></li>
   </ol>
 <% end %>
