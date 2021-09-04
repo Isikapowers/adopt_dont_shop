@@ -1,12 +1,12 @@
 class ApplicationsController < ApplicationController
-  
+
   def index
     @applications = Application.all
   end
 
   def show
     @application = Application.find(params[:id])
-    @pets = @application.pets.search(params[:search])
+    @pets = Pet.search(params[:search])
   end
 
   def new

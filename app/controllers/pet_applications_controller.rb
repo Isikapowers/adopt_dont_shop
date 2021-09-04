@@ -1,11 +1,14 @@
 class PetApplicationsController < ApplicationController
 
+  def index
+  end
+
   def new
   end
 
   def create
     @application = Application.find(params[:id])
-    @pet = Pet.find(params[:id])
+    @pets = Pet.find(params[:id])
     PetApplication.create!(application: @application, pet: @pets)
 
     redirect_to "/applications/#{@application.id}"
@@ -28,5 +31,5 @@ class PetApplicationsController < ApplicationController
   def pet_application_params
     params.permit(:status)
   end
-  
+
 end

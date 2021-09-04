@@ -1,40 +1,43 @@
 <h2>Application</h2><br>
 
+<% if @application.status == "In Progress" %>
+  <h5>Add Pet(s) to Adopt:</h5>
+  <%= form_with url: "/applications/#{@application.id}?search=name", method: :get, local: true do %>
+    <%= text_field_tag(:search, params[:search]) %>
+    <%= submit_tag ("Search") %>
+  <% end %>
+  <% if params[:search] %>
+    <% @pets.each do |pet| %>
+      <section id="Pet-<%= pet.id %>">
+      <h5><%= link_to pet.name, "/pets/#{pet.id}" %></h5>
+      <p>Age: <%= pet.age %> years old</p>
+      <p>Breed: <%= pet.breed %></p>
+      <p>Adoptable: <%= pet.adoptable %></p>
+      <p>Find me at <%= pet.shelter_name %>!</p>
+      <%= button_to "Adopt this Pet", { controller: :pet_applications, action: :create, pet_id: pet.id}, method: :post, class: "sm-btn btn-info" %>
+      </section>
+    <% end %>
+  <% end %>
+
+<% end %><br>
+
 <p>Name: <%= @application.applicant_name %></p>
 <p>Address: <%= @application.applicant_street_address %><p>
 <p>City: <%= @application.applicant_city %></p>
 <p>State: <%= @application.applicant_state %></p>
 <p>Zipcode: <%= @application.applicant_zipcode %></p>
 
-<p>Why I would make a good owner for the pet(s):
-  <%= @application.description %>
+<p>Why I would make a good owner for the pet(s):</p>
+    <ul><%= @application.description %></ul>
 
 <p>Names of pets you wish to adopt:</p>
   <% @application.pets.each do |pet| %>
-    <p><%= pet.name %></p>
+    <ul>
+      <li><%= pet.name %></li>
+    </ul>
   <% end %>
 
 <p>Status: <%= @application.status %></p><br>
-
-<% if @application.status == "In Progress" %>
-  <h5>Add Pets to Adopt:</h5>
-  <%= form_with url: "/applications/#{@application.id}/pets?search=name", method: :get, local: true do |f| %>
-  <%= text_field_tag(:search, params[:search]) %>
-  <%= submit_tag ("Search") %>
-  <% end %>
-
-  <% @pets.each do |pet| %>
-  <section id="Pet-<%= pet.id %>">
-    <%= link_to pet.name, "/pets/#{pet.id}"  %>
-    <%= button_to "Adopt this Pet", "/applications/#{@application.id}", method: :post %>
-
-    <!-- <p>Age: <%= pet.age %> years old</p>
-    <p>Breed: <%= pet.breed %></p>
-    <p>Adoptable: <%= pet.adoptable %></p>
-    <p>Find me at <%= pet.shelter_name %>!</p> -->
-  </section>
-  <% end %>
-<% end  %>
 
 <% if @application.pets != [] && @application.status == 'In Progress' %>
   <%= form_with url: "/applications/#{@application.id}", method: :patch, local: true do |f| %>
