@@ -13,6 +13,7 @@ class PetsController < ApplicationController
 
   def new
     @shelter = Shelter.find(params[:shelter_id])
+    @pet = @shelter.pets.new(pet_params)
   end
 
   def create
@@ -41,6 +42,7 @@ class PetsController < ApplicationController
 
   def destroy
     Pet.find(params[:id]).destroy
+    
     redirect_to '/pets'
   end
 
