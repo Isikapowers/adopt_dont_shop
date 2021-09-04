@@ -44,7 +44,7 @@ RSpec.describe "Application Show Page" do
       # expect(page).to have_content(@fido.name)
     end
 
-   it "allows applicant to click on adopt this pet" do
+   xit "allows applicant to click on adopt this pet" do
       visit "/applications/#{@dean.id}"
 
       fill_in :search, with: "Fido"

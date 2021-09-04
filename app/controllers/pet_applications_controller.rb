@@ -1,4 +1,5 @@
 class PetApplicationsController < ApplicationController
+
   def new
   end
 
@@ -20,11 +21,12 @@ class PetApplicationsController < ApplicationController
 
     redirect_to "/admin/applications/#{application.id}"
   end
-  
+
 
   private
 
   def pet_application_params
     params.permit(:status)
   end
+  
 end

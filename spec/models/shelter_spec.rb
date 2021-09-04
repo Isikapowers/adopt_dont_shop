@@ -51,13 +51,13 @@ RSpec.describe Shelter, type: :model do
     end
 
     describe '.alphabetical_pets' do
-      it 'returns pets associated with the given shelter in alphabetical name order' do
+      xit 'returns pets associated with the given shelter in alphabetical name order' do
         expect(@shelter_1.alphabetical_pets).to eq([@pet_4, @pet_2])
       end
     end
 
     describe '.shelter_pets_filtered_by_age' do
-      it 'filters the shelter pets based on given params' do
+      xit 'filters the shelter pets based on given params' do
         expect(@shelter_1.shelter_pets_filtered_by_age(5)).to eq([@pet_4])
       end
     end

@@ -18,10 +18,10 @@ RSpec.describe 'the shelter update' do
 
       visit "/shelters/#{shelter.id}/edit"
 
-      fill_in 'Name', with: 'Wichita Shelter'
-      fill_in 'City', with: 'Wichita'
+      fill_in :name, with: 'Wichita Shelter'
+      fill_in :city, with: 'Wichita'
       uncheck 'Foster program'
-      fill_in 'Rank', with: 10
+      fill_in :rank, with: 10
       click_button 'Save'
 
       expect(page).to have_current_path('/shelters')
@@ -36,13 +36,13 @@ RSpec.describe 'the shelter update' do
 
       visit "/shelters/#{shelter.id}/edit"
 
-      fill_in 'Name', with: ''
-      fill_in 'City', with: 'Wichita'
+      fill_in :name, with: ''
+      fill_in :city, with: 'Wichita'
       uncheck 'Foster program'
       click_button 'Save'
 
       expect(page).to have_content("Error: Name can't be blank")
-      expect(page).to have_current_path("/shelters/#{shelter.id}")
+      expect(page).to have_current_path("/shelters/#{shelter.id}/edit")
     end
   end
 end

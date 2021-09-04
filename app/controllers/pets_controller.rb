@@ -1,10 +1,11 @@
 class PetsController < ApplicationController
 
   def index
+    @pets = Pet.all
     if params[:search].present?
       @pets = Pet.search(params[:search])
-    else
-      @pets = Pet.adoptable
+    # else
+    #   @pets = Pet.adoptable
     end
   end
 
@@ -14,7 +15,7 @@ class PetsController < ApplicationController
 
   def new
     @shelter = Shelter.find(params[:shelter_id])
-    # @pet = @shelter.pets.new(pet_params)
+    @pet = @shelter.pets.new(pet_params)
   end
 
   def create
@@ -54,5 +55,5 @@ class PetsController < ApplicationController
   def pet_params
     params.permit(:id, :name, :age, :breed, :adoptable, :shelter_id)
   end
-  
+
 end

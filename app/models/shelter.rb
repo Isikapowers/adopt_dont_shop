@@ -1,4 +1,5 @@
 class Shelter < ApplicationRecord
+
   validates :name, presence: true
   validates :rank, presence: true, numericality: true
   validates :city, presence: true
@@ -47,4 +48,5 @@ class Shelter < ApplicationRecord
   def pets_pending_applications
     pets.joins(:applications).where("applications.status = ?", "Pending").distinct
   end
+
 end

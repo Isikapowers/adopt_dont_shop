@@ -6,8 +6,9 @@
 <p>State: <%= @application.applicant_state %></p>
 <p>Zipcode: <%= @application.applicant_zipcode %></p>
 
-<p>How would you prepare a good home for pets:</p>
-<p><%= @application.description %></p>
+<p>Why I would make a good owner for the pet(s):
+  <%= @application.description %>
+
 <p>Names of pets you wish to adopt:</p>
   <% @application.pets.each do |pet| %>
     <p><%= pet.name %></p>
@@ -17,20 +18,20 @@
 
 <% if @application.status == "In Progress" %>
   <h5>Add Pets to Adopt:</h5>
-  <%= render partial: "search", locals: { path: "/applications/#{@application.id}", method: :get } %>
-<% end  %>
+  <%= form_with url: "/applications/#{@application.id}/pets?search=name", method: :get, local: true do |f| %>
+  <%= text_field_tag(:search, params[:search]) %>
+  <%= submit_tag ("Search") %>
+  <% end %>
 
-<% if params[:search] %>
   <% @pets.each do |pet| %>
   <section id="Pet-<%= pet.id %>">
-  <h5>
-    <%= render partial: "link", locals: { name: "#{pet.name}", path: "pets/#{pet.id}", method: :get } %>
-    <%= button_to "Adopt this Pet", { controller: "pet_applications", action: :create, pet_id: :pet.id } , method: :post %>
-  </h5>
-    <p><%= pet.age %> years old</p>
-    <p><%= pet.breed %></p>
-    <p><%= pet.adoptable %></p>
-    <p><%= pet.shelter_name %></p>
+    <%= link_to pet.name, "/pets/#{pet.id}"  %>
+    <%= button_to "Adopt this Pet", "/applications/#{@application.id}", method: :post %>
+
+    <!-- <p>Age: <%= pet.age %> years old</p>
+    <p>Breed: <%= pet.breed %></p>
+    <p>Adoptable: <%= pet.adoptable %></p>
+    <p>Find me at <%= pet.shelter_name %>!</p> -->
   </section>
   <% end %>
 <% end  %>

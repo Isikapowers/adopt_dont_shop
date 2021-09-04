@@ -1,6 +1,8 @@
 <h1>All Pets</h1><br>
 
-<%= render partial: 'search', locals: { path: "/pets", method: :get } %><br>
+<%= render partial: "link", locals: { name: "Start an Application", path: "/applications/new", method: :get } %><br><br>
+
+<%= render partial: "search", locals: { path: "/pets", method: :get } %><br>
 
 <% @pets.each do |pet| %>
   <h3><%= pet.name %></h3>
@@ -15,5 +17,3 @@
   <%= render partial: 'link', locals: { name: "Delete #{pet.name}", path: "/pets/#{pet.id}", method: :delete } %>
   <p></p>
 <% end %><br>
-
-<%= render partial: 'link', locals: { name: 'New Application', path: "/applications/new", method: :get } %>

@@ -21,7 +21,7 @@ RSpec.describe "Application New Page" do
     it "has a link to start an application" do
       visit "/pets"
 
-      click_on "Start an Application"
+      click_on "Start an Application", match: :first
 
       expect(current_path).to eq("/applications/new")
       expect(page).to have_field("Name")
@@ -29,8 +29,6 @@ RSpec.describe "Application New Page" do
       expect(page).to have_field("City")
       expect(page).to have_field("State")
       expect(page).to have_field("Zipcode")
-      expect(page).to have_field("Description")
-      expect(page).to have_field("Status")
     end
 
     it "requires applicant to fill in all fields to be able to submit successfully" do
@@ -41,13 +39,13 @@ RSpec.describe "Application New Page" do
       fill_in "City", with: ""
       fill_in "State", with: "CO"
       fill_in "Zipcode", with: "89768"
-      fill_in "Description", with: "I would love for my dog to have friends"
+      # fill_in "Description", with: "I would love for my dog to have friends"
       # fill_in "Status", with: "In Progress"
 
       click_on "Submit"
 
       expect(current_path).to eq("/applications/new")
-      # expect(page).to have_content("Error: City can't be blank")
+      expect(page).to have_content("Error:")
     end
   end
 end

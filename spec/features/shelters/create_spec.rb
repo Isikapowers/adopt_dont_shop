@@ -18,10 +18,10 @@ RSpec.describe 'shelter creation' do
       it 'creates the shelter' do
         visit '/shelters/new'
 
-        fill_in 'Name', with: 'Houston Shelter'
-        fill_in 'City', with: 'Houston'
+        fill_in :name, with: 'Houston Shelter'
+        fill_in :city, with: 'Houston'
         check 'Foster program'
-        fill_in 'Rank', with: 7
+        fill_in :rank, with: 7
         click_button 'Save'
 
         expect(page).to have_current_path('/shelters')
