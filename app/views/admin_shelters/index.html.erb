@@ -2,7 +2,7 @@
 
 <% @shelters.each do |shelter| %>
   <ul>
-    <li><%= link_to shelter.name, "/shelters/#{shelter.id}" %></li>
+    <li><%= link_to shelter.name, "admin/shelters/#{shelter.id}", method: :get %></li>
   </ul>
 <% end %><br>
 
@@ -10,6 +10,6 @@
 
 <% @shelters_pending.each do |shelter| %>
   <ul>
-    <li><%= link_to shelter.name, "/shelters/#{shelter.id}" %></li>
+    <li><%= link_to shelter.name, "/shelters/#{shelter.id}", method: :get %></li>
   </ul>
 <% end %><br>
