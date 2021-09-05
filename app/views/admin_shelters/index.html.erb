@@ -1,0 +1,15 @@
+<h4>List of Shelters</h4><br>
+
+<% @shelters.each do |shelter| %>
+  <ul>
+    <li><%= link_to shelter.name, "/shelters/#{shelter.id}" %></li>
+  </ul>
+<% end %><br>
+
+<h4>Shelters with Pending Applications:</h4><br>
+
+<% @shelters_pending.each do |shelter| %>
+  <ul>
+    <li><%= link_to shelter.name, "/shelters/#{shelter.id}" %></li>
+  </ul>
+<% end %><br>
