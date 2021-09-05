@@ -1,51 +1,55 @@
 require "rails_helper"
 
 RSpec.describe "Application New Page" do
-  describe "Fail to Fill In any Form Fields" do
-    before :each do
-      @shelter = Shelter.create!(name: "Central Park Shelter", address: "333 Central Street",
-                                 city: "Denver", zipcode: "89999", foster_program: false, rank: 3)
+  describe "Application form" do
+    it 'can link to new application from home page' do
+      visit '/'
 
-      @crab = Pet.create!(name: "Crabby", age: 6, breed: "Bulldog", adoptable: true, shelter_id: @shelter.id)
-      @fido = Pet.create!(name: "Fido", age: 3, breed: "Golden Retriver", adoptable: true, shelter_id: @shelter.id)
+      click_link 'Apply for a Pet!'
 
-      @dean = Application.create!(applicant_name: "Dean Dumdun",
-                                  applicant_street_address: "123 Main Street",
-                                  applicant_city: "Denver",
-                                  applicant_state: "CO",
-                                  applicant_zipcode: "56789",
-                                  description: "I already have a dog and would love for him to have friends",
-                                  status: "In Progress")
+      expect(current_path).to eq('/applications/new')
     end
 
-    it "has a link to start an application" do
-      visit "/pets"
+    it 'can link to new applicaiton from pet index page' do
+      visit '/pets'
 
-      click_on "Start an Application", match: :first
+      click_link 'Start an Application', match: :first
 
-      expect(current_path).to eq("/applications/new")
-      expect(page).to have_field("Name")
-      expect(page).to have_field("Street Address")
-      expect(page).to have_field("City")
-      expect(page).to have_field("State")
-      expect(page).to have_field("Zipcode")
+      expect(current_path).to eq('/applications/new')
     end
 
-    it "requires applicant to fill in all fields to be able to submit successfully" do
-      visit "/applications/new"
+    it 'can fill out a form and create a new application' do
+      visit '/applications/new'
 
-      fill_in "Name", with: "Dean Durham"
-      fill_in "Street Address", with: "123 Main Street"
-      fill_in "City", with: ""
-      fill_in "State", with: "CO"
-      fill_in "Zipcode", with: "89768"
-      # fill_in "Description", with: "I would love for my dog to have friends"
-      # fill_in "Status", with: "In Progress"
+      fill_in :application_applicant_name, with: 'Cynthia Brown'
+      fill_in :application_applicant_street_address, with: '765 Bee Drive'
+      fill_in :application_applicant_city, with: 'Elizabethton'
+      fill_in :application_applicant_state, with: 'TN'
+      fill_in :application_applicant_zipcode, with: '37644'
 
-      click_on "Submit"
+      click_button 'Submit'
 
-      expect(current_path).to eq("/applications/new")
-      expect(page).to have_content("Error:")
+      expect(page).to have_content('Cynthia Brown')
+      expect(page).to have_content('765 Bee Drive')
+      expect(page).to have_content('Elizabethton')
+      expect(page).to have_content('TN')
+      expect(page).to have_content('37644')
+      expect(page).to have_content('In Progress')
+    end
+
+   it 'can return error message when all fields are not filled in' do
+      visit '/applications/new'
+
+      fill_in :application_applicant_name, with: 'Cynthia Brown'
+      fill_in :application_applicant_street_address, with: '765 Bee Drive'
+      fill_in :application_applicant_city, with: 'Elizabethton'
+      fill_in :application_applicant_state, with: 'TN'
+      fill_in :application_applicant_zipcode, with: ''
+
+      click_button 'Submit'
+
+      expect(page).to have_current_path('/applications/new')
+      expect(page).to have_content("Error: ")
     end
   end
 end

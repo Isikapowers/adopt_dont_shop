@@ -2,75 +2,140 @@ require "rails_helper"
 
 RSpec.describe "Application Show Page" do
   before :each do
-    @shelter = Shelter.create!(name: "Central Park Shelter", address: "333 Central Street",
-                               city: "Denver", zipcode: "89999", foster_program: false, rank: 3)
+   @shelter = Shelter.create!(name: 'Aurora shelter', address: '1234 North Street', city: 'Aurora, CO', zipcode: '80010', foster_program: false, rank: 9)
 
-    @crab = Pet.create!(name: "Crabby", age: 6, breed: "Bulldog", adoptable: true, shelter_id: @shelter.id)
-    @fido = Pet.create!(name: "Fido", age: 3, breed: "Golden Retriver", adoptable: true, shelter_id: @shelter.id)
+   @pet_1 = Pet.create!(adoptable: true, age: 1, breed: 'sphynx', name: 'Lucille Bald', shelter_id: @shelter.id)
+   @pet_2 = Pet.create!(adoptable: true, age: 3, breed: 'doberman', name: 'Lobster', shelter_id: @shelter.id)
 
-    @dean = Application.create!(applicant_name: "Dean Dumdun",
-                                applicant_street_address: "123 Main Street",
-                                applicant_city: "Denver",
-                                applicant_state: "CO",
-                                applicant_zipcode: "56789",
-                                description: "I already have a dog and would love for him to have friends",
-                                status: "In Progress")
+   @app = Application.create!(applicant_name: 'Freddy', applicant_street_address: '13 Walk Way', applicant_city: 'Aurora', applicant_state: 'CO', applicant_zipcode: '82012', status: 'In Progress')
+ end
 
-    @dean.pets << @crab
-    @dean.pets << @fido
-  end
+ describe "Apply for pet(s) functionalities" do
+   it "can create an application" do
+     expect(@app).to be_valid
+   end
 
-  it "can show the application's attributes" do
-    visit "/applications/#{@dean.id}"
+   it 'shows an application and all attributes' do
+     @app.pets << @pet_1
+     @app.pets << @pet_2
 
-    expect(page).to have_content(@dean.applicant_name)
-    expect(page).to have_content(@dean.applicant_street_address)
-    expect(page).to have_content(@dean.applicant_city)
-    expect(page).to have_content(@dean.applicant_zipcode)
-    expect(page).to have_content(@dean.description)
-    expect(page).to have_content(@dean.status)
-    expect(page).to have_content(@crab.name)
-    expect(page).to have_content(@fido.name)
-  end
+     visit "/applications/#{@app.id}"
 
-  describe "Search and Add a pet to an application" do
-    it "allows applicant to search for a pet by name" do
-      visit "/applications"
+     expect(page).to have_content(@app.applicant_name)
+     expect(page).to have_content(@app.applicant_street_address)
+     expect(page).to have_content(@app.applicant_city)
+     expect(page).to have_content(@app.applicant_state)
+     expect(page).to have_content(@app.applicant_zipcode)
+     expect(page).to have_content(@app.status)
+     expect(page).to have_content(@pet_1.name)
+     expect(page).to have_content(@pet_2.name)
+   end
 
-      fill_in "Search", with: "Fido"
-      click_on "Search"
+   it 'can search for a pet' do
+     visit "/applications/#{@app.id}"
 
-      expect(current_path).to eq("/applications")
-      # expect(page).to have_content(@fido.name)
-    end
+     fill_in :search, with: 'Lobster'
+     click_button 'Search', match: :first
 
-   xit "allows applicant to click on adopt this pet" do
-      visit "/applications/#{@dean.id}"
+     expect(current_path).to eq("/applications/#{@app.id}")
+     expect(page).to have_content('Lobster')
+   end
 
-      fill_in :search, with: "Fido"
-      click_on "Search", match: :first
+   it 'can add pet to application' do
+     visit "/applications/#{@app.id}"
 
-      within("#Pet-#{@fido.id}") do
-        click_on "Adopt this Pet"
-      end
+     fill_in :search, with: 'Lobster'
+     click_button 'Search', match: :first
 
-      expect(current_path).to eq("/applications/#{@dean.id}")
-      expect(@dean.pets).to eq([@fido])
+   # within("#Pet-#{@pet_2.id}") do
+     click_button 'Adopt this Pet'
+   # end
 
-      expect(page).to have_content(@fido.name)
-    end
+     expect(current_path).to eq("/applications/#{@app.id}")
+     expect(@app.pets).to eq([@pet_2])
+   end
 
-    it "only allows applicant to submit when pets have been selected" do
-      visit "/applications/#{@dean.id}"
+   it 'can submit and enter description when pets have been selected' do
+     @app.pets << @pet_2
 
-      fill_in :description, with: "I want to get a dog for my kids"
-      click_on "Submit Application"
+     visit "/applications/#{@app.id}"
 
-      expect(current_path).to eq("/applications/#{@dean.id}")
-      expect(page).to have_content("Pending")
-      expect(page).to have_content(@crab.name)
-      expect(page).to have_content("I want to get a dog for my kids")
-      expect(page).to_not have_content("Add Pets to Adopt:")
-    end
-  end
+     fill_in :description, with: 'I have a big yard'
+     click_button 'Submit Application'
+
+     expect(current_path).to eq("/applications/#{@app.id}")
+     expect(page).to have_content("Pending")
+     expect(page).to have_content(@pet_2.name)
+     expect(page).to have_content('I have a big yard')
+     expect(page).to_not have_content('Add Pets to Adopt:')
+   end
+
+   it 'can return error message when all fields are not filled in' do
+     @app.pets << @pet_2
+
+     visit "/applications/#{@app.id}"
+
+     fill_in :description, with: ""
+     click_button "Submit Application"
+
+     expect(page).to have_current_path("/applications/#{@app.id}")
+     expect(page).to have_content("Error: Description can't be blank")
+   end
+
+   it 'cannot submit form if not animals have been selected' do
+     visit "/applications/#{@app.id}"
+
+     expect(page).to_not have_button('Submit Application')
+   end
+
+   it 'can search for animal by partial matches' do
+     visit "/applications/#{@app.id}"
+
+     fill_in :search, with: 'Lob'
+     click_button 'Search', match: :first
+
+     expect(current_path).to eq("/applications/#{@app.id}")
+     expect(page).to have_content('Lobster')
+   end
+
+   it 'can search for animal by case insensitive' do
+     visit "/applications/#{@app.id}"
+
+     fill_in :search, with: 'lucille'
+     click_button 'Search', match: :first
+
+     expect(current_path).to eq("/applications/#{@app.id}")
+     expect(page).to have_content(@pet_1.name)
+   end
+ end
+
+ describe '#instance methods' do
+   it 'returns the shelter name for the given pet' do
+     expect(@pet_2.shelter_name).to eq(@shelter.name)
+   end
+
+   it 'returns pets that are adoptable' do
+     expect(Pet.adoptable).to eq([@pet_1, @pet_2])
+   end
+
+   it 'returns pets in alphabetical name order' do
+     expect(Pet.alphabetical_pets).to eq([@pet_2, @pet_1])
+   end
+
+   it 'can filter pets by age' do
+     expect(Pet.shelter_pets_filtered_by_age(3)).to eq([@pet_2])
+   end
+
+   xit 'can count adoptable pets' do
+     expect(@shelter.pets.adoptable_pet_count).to eq(2)
+   end
+
+   it 'can show all adoptable pets' do
+     expect(@shelter.adoptable_pets).to eq([@pet_1, @pet_2])
+   end
+
+   it "can count all pets in a shelter" do
+     expect(@shelter.pet_count).to eq(2)
+   end
+ end
 end
