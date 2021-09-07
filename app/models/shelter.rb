@@ -2,14 +2,21 @@ class Shelter < ApplicationRecord
 
   validates :name, presence: true
   validates :rank, presence: true, numericality: true
+  validates :address, presence: true
   validates :city, presence: true
+  validates :state, presence: true
+  validates :zipcode, presence: true
 
   has_many :pets, dependent: :destroy
-  has_many :applications, dependent: :destroy
-  has_many :pet_applications, dependent: :destroy
+  # has_many :applications, dependent: :destroy
+  # has_many :pet_applications, dependent: :destroy
 
   def self.order_by_recently_created
     order(created_at: :desc)
+  end
+
+  def average_pet_age
+    pets.average(:age).round
   end
 
   def self.order_by_name_in_reverse
@@ -44,13 +51,9 @@ class Shelter < ApplicationRecord
   #   adoptable_pets.where('age >= ?', age_filter)
   # end
   #
-  # def adoptable_pet_count
-  #   adoptable_pets.count
-  # end
-  #
-  # def average_pet_age
-  #   pets.average(:age).to_i
-  # end
+  def adoptable_pet_count
+    adoptable_pets.count
+  end
 
   def adopted_pet_count
     pets.select("applications.*").joins(:applications).where("applications.status = ?", "Approved").count

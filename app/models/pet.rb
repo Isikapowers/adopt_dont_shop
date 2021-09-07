@@ -20,7 +20,7 @@ class Pet < ApplicationRecord
   end
 
   def self.alphabetical_pets
-    adoptable.order(name: :asc)
+    order(name: :asc)
   end
 
   def self.shelter_pets_filtered_by_age(age_filter)

@@ -8,13 +8,18 @@ class ShelterPetsController < ApplicationController
       @pets = @pets.alphabetical_pets
     elsif params[:age]
       @pets = @pets.shelter_pets_filtered_by_age(params[:age])
-    
-      # @pets = @pets.adoptable
+    elsif params[:sort] == "adoptable"
+      @pets = @pets.adoptable
     end
   end
 
   def show
     @shelter = Shelter.find(params[:id])
+  end
+
+  def edit
+    @shelter = Shelter.find(params[:shelter_id])
+    @pet = @shelter.pets.find(params[:pet_id])
   end
 
 end

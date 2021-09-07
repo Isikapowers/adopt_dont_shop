@@ -1,11 +1,23 @@
 <div class="card">
   <h3 class="card-header"><%= @shelter.name %></h3>
   <div class="card-body">
-    <h5 class="card-title">Rank: <%= @shelter.rank %></h5>
+    <h5 class="card-title">Rank: <%= @shelter.rank %></h5><br>
+    <h5 class="card-title">Address: <%= @shelter.address %></h5>
     <h5 class="card-title">City: <%= @shelter.city %></h5>
+    <h5 class="card-title">State: <%= @shelter.state %></h5>
+    <h5 class="card-title">Zipcode: <%= @shelter.zipcode %></h5><br>
     <h5 class="card-title">Number of pets: <%= @shelter.pet_count %></h5><br>
 
     <%= button_to "List of Pets", "/shelters/#{@shelter.id}/pets", method: :get, class: "sm-btn btn-info" %>
+  </div>
+</div><br>
+
+<div class="card">
+  <h3 class="card-header">Statistics</h3>
+  <div class="card-body">
+    <h5 class="card-title">Average Pet Age: <%= @shelter.average_pet_age %> years old</h5>
+    <h5 class="card-title">Number of Adoptable Pets: <%= @shelter.adoptable_pet_count %></h5>
+    <h5 class="card-title">Number of Adopted Pets: <%= @shelter.adopted_pet_count %></h5>
   </div>
 </div><br>
 
