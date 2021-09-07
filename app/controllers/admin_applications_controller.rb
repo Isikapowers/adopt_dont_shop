@@ -9,10 +9,10 @@ class AdminApplicationsController < ApplicationController
     @pets = Pet.all
     @pet_application = PetApplication.find(params[:id])
 
-    if params[:status] == "Rejected"
+    if params[:status] == "rejected"
       @pet_application.update_attribute(:status, "Rejected") &&
       @application.update_attribute(:status, "Rejected")
-    elsif params[:status] == "Approved"
+    elsif params[:status] == "approved"
       @pet_application.update_attribute(:status, "Approved") &&
       @application.update_attribute(:status, "Approved") &&
       @application.pets.update_all(adoptable: false)
