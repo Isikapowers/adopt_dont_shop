@@ -45,7 +45,7 @@ RSpec.describe Pet, type: :model do
     end
 
     it 'returns pets in alphabetical name order' do
-      expect(Pet.alphabetical_pets).to eq([@pet_3, @pet_2, @pet_1])
+      expect(Pet.alphabetical_pets).to eq([@pet_3.name, @pet_2.name, @pet_1.name])
     end
 
     it 'can filter pets by age' do

@@ -1,9 +1,11 @@
-<h1><%= @shelter.name %></h1><br>
+<div class="card">
+  <h3 class="card-header"><%= @shelter.name %></h3>
+  <div class="card-body">
+    <h5 class="card-title">Rank: <%= @shelter.rank %></h5>
+    <h5 class="card-title">City: <%= @shelter.city %></h5>
+    <h5 class="card-text">Number of pets: <%= @shelter.pet_count %></h5><br>
 
-<p>Rank: <%= @shelter.rank %></p>
-<p>City: <%= @shelter.city %></p>
-
-<p class="pet-count">Number of pets: <%= @shelter.pet_count %></p>
-<p><%= button_to "Check Out Our Pets!", "/shelters/#{@shelter.id}/pets", method: :get, class: "sm-btn btn-info" %></p>
-
-<p><%= button_to "Delete #{@shelter.name}", "/shelters/#{@shelter.id}", method: :delete, class: "sm-btn btn-danger" %></p>
+    <%= button_to "Check Out Our Pets!", "/shelters/#{@shelter.id}/pets", method: :get, class: "sm-btn btn-info" %>
+    <%= button_to "Delete #{@shelter.name}", "/shelters/#{@shelter.id}", method: :delete, class: "sm-btn btn-danger" %>
+  </div>
+</div>

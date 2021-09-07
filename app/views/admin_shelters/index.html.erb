@@ -1,15 +1,28 @@
-<h4>List of Shelters</h4><br>
-
-<% @shelters.each do |shelter| %>
-  <ul>
-    <li><%= link_to shelter.name, "admin/shelters/#{shelter.id}", method: :get %></li>
-  </ul>
-<% end %><br>
-
-<h4>Shelters with Pending Applications:</h4><br>
-
-<% @shelters_pending.each do |shelter| %>
-  <ul>
-    <li><%= link_to shelter.name, "/shelters/#{shelter.id}", method: :get %></li>
-  </ul>
-<% end %><br>
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-header">All Shelters:</h4>
+        <p class="card-text"><% @shelters.each do |shelter| %>
+          <ul>
+            <li><%= link_to shelter.name, "/admin/shelters/#{shelter.id}", method: :get %></li>
+          </ul>
+        <% end %><br>
+      </p>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-header">Shelters with Pending Applications:</h4>
+        <p class="card-text"><% @shelters_pending.each do |shelter| %>
+          <ul>
+            <li><%= link_to shelter.name, "/admin/shelters/#{shelter.id}", method: :get %></li>
+          </ul>
+        <% end %><br>
+      </p>
+      </div>
+    </div>
+  </div>
+</div>

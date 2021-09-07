@@ -15,6 +15,6 @@
     <h3><%= link_to shelter.name, "/shelters/#{shelter.id}" %></h3>
     <p>Created at: <%= shelter.created_at.to_date%></p>
     <%= button_to "Update", "/shelters/#{shelter.id}/edit", method: :get, class: "sm-btn btn-secondary"  %>
-    <%= button_to "Delete", "/shelters/#{shelter.id}", method: :delete, class: "sm-btn btn-danger", confirm: "Are you sure you want to delete this?" %>
+    <%= button_to "Delete", "/shelters/#{shelter.id}", method: :delete, class: "sm-btn btn-danger", data: { confirm: "Are you sure you want to delete this?" } %>
   </div><br>
 <% end %><br>

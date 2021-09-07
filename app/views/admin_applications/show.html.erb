@@ -1,36 +1,41 @@
-<!-- <h4>Pending Application</h4><br>
+<div class="card">
+  <div class="card-header">
+    <h3>Application for <%= @application.applicant_name %> </h3>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Application Status:  <%= @application.status %></h5><br>
+    <h5 class="card-text">Description on why they would make a good owner for the pet(s):</h5>
+    <ul><%= @application.description %></ul><br>
 
-  <p>Applicant's Name: <%= link_to @pet_application.application.applicant_name, "/applications/#{@pet_application.application.id}" %></p><br>
-
-  <p>Pet's Name(s): <%= link_to @pet_application.pet.name, "/pets/#{@pet_application.pet.id}" %></p><br>
-
-  <!-- <p>Shelter: <%= link_to @pet_application.pet.shelter.name, "/shelters/#{@pet_application.pet.shelter.id}/pets/#{@pet_application.pet.id}" %></p><br> -->
-
-  <%= button_to "Approve", "/admin/applications/#{@pet_application.application.id}", method: :patch, class: "btn btn-info" %><br> -->
-
-
-<h1>Application for <%= @application.applicant_name %> </h1>
-
-  <h2>Application Status:</h2>
-  <h3 class="status"><%= @application.status %></h3>
-
-  <h2>Applicant description on why they would make a good owner for the pets below:</h2>
-  <p><%= @application.description %></p>
-
-  <h2>Pets Applying For:</h2>
-  <% @application.pets.each do |pet| %>
-    <h3><%= pet.name %></h3>
-    <div id="pet-<%= pet.id %>">
-      <% if @pet_application.find_by_pet_and_app_id(@application.id, pet.id).status == 'Approved' %>
-        <h4>Pet Approved</h4>
-      <% elsif @pet_application.find_by_pet_and_app_id(@application.id, pet.id).status == 'Rejected' %>
-        <h4>Pet Rejected</h4>
-      <% elsif pet.adoptable == false %>
-        <%= render partial: 'form', locals: { path: "/admin/applications/#{@application.id}", method: :patch, status: 'Rejected', pet_id: pet.id, button_name: 'Reject Application' } %>
-      <% else %>
-        <%= render partial: 'form', locals: { path: "/admin/applications/#{@application.id}", method: :patch, status: 'Approved', pet_id: pet.id, button_name: 'Approve Application' } %>
-        <%= render partial: 'form', locals: { path: "/admin/applications/#{@application.id}", method: :patch, status: 'Rejected', pet_id: pet.id, button_name: 'Reject Application' } %>
-      <% end %>
-    </div>
-
-  <% end %>
+    <h5>Pets Applying For:</h5><br>
+    <% @application.pets.each do |pet| %>
+      <ul>
+        <li><h5>Name: <%= link_to pet.name, "/pets/#{pet.id}" %></h5>
+          <h5>Adoptable: <%= pet.adoptable %> </h5><br>
+        <div id="pet-<%= pet.id %>">
+          <% if @application.status == "Approved" %>
+            <a class="badge badge-success"><h5>Application has been approved.</h5></a>
+          <% elsif @application.status == "Rejected" %>
+            <a class="badge badge-danger"><h5>Application has been rejected.</h5></a>
+          <% else %>
+            <% if pet.adoptable == false %>
+            <% @application.update_attribute(:status, "Rejected") %>
+            <% else %>
+            <%= form_with url: "/admin/applications/#{@application.id}?status=Approved", method: :patch, local: true do |f| %>
+               <%= f.hidden_field :status, value: "Approved" %>
+               <%= f.hidden_field :pet_id, value: pet.id %>
+              <%= f.submit "Approve Application", class: "btn btn-info" %>
+            <% end %>
+            <%= form_with url: "/admin/applications/#{@application.id}?status=Rejected", method: :patch, local: true do |f| %>
+              <%= f.hidden_field :status, value: "Rejected" %>
+              <%= f.hidden_field :pet_id, value: pet.id %>
+              <%= f.submit "Reject Application", class: "btn btn-warning" %>
+            <% end %>
+            <% end %>
+          <% end %>
+        </div>
+        </li>
+      </ul>
+    <% end %>
+  </div>
+</div>

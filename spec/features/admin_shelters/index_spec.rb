@@ -13,7 +13,7 @@ RSpec.describe "Admin Shelter Index Page" do
 
   describe "Shelters" do
     it "can list all shelters in the system in reverse alphabetical order by name" do
-      visit "/admins/shelters"
+      visit "/admin/shelters"
 
       expect(page).to have_content(@shelter_1.name)
       expect(page).to have_content(@shelter_2.name)
@@ -24,7 +24,7 @@ RSpec.describe "Admin Shelter Index Page" do
     end
 
     it "can display only the names of every shelter that has a pending application" do
-      visit "/admins/shelters"
+      visit "/admin/shelters"
 
       expect(page).to have_content("Shelters with Pending Applications:")
 

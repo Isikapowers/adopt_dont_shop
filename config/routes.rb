@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
   get "/", to: "application#welcome"
+  get "/application/:id", to: "application#show"
 
   get "/admin/shelters", to: "admin_shelters#index"
   get "/admin/shelters/:id", to: "admin_shelters#show"
+  get "/admin/shelters/:id/pets", to: "admin_shelters#show"
 
   get "/admin/applications", to: "admin_applications#index"
   get "/admin/applications/:id", to: "admin_applications#show"
+  patch "/admin/applications/:id", to: "admin_applications#show"
 
   # resources :applications, :pets, :shelters
 
@@ -53,7 +56,7 @@ Rails.application.routes.draw do
   get '/applications/new', to: 'applications#new'
   get '/applications/:id', to: "applications#show"
   post '/applications', to: 'applications#create'
-  get '/applications/:id', to: 'applications#edit'
+  get '/applications/:id/edit', to: 'applications#edit'
   patch '/applications/:id', to: 'applications#update'
   delete '/applications/:id', to: "applications#destroy"
 

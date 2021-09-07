@@ -1,8 +1,22 @@
 <h3>All Applications</h3><br>
 
-<% @applications.each do |application| %>
-
-    <%= link_to "#{application.applicant_name}", "/applications/#{application.id}" %>
-    <p>Status: <%= application.status %> </p>
-
-<% end %>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Application ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Status</th>
+      <th scope="col">Date Submitted</th>
+      <% @applications.order_by_id.each do |application| %>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row"><%= application.id%></th>
+      <td><%= link_to "#{application.applicant_name}", "/applications/#{application.id}" %></td>
+      <td><%= application.status %></td>
+      <td><%= application.created_at.to_date %></td>
+      <% end %>
+    </tr>
+  </tbody>
+</table>

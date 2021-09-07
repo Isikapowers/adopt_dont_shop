@@ -1,10 +1,10 @@
 class Pet < ApplicationRecord
-  
+
   validates :name, presence: true
   validates :age, presence: true, numericality: true
   belongs_to :shelter
 
-  has_many :pet_applications
+  has_many :pet_applications, dependent: :destroy
   has_many :applications, through: :pet_applications
 
   def shelter_name
@@ -28,10 +28,14 @@ class Pet < ApplicationRecord
   end
 
   def adoptable_pet_count
-    self.count
+    count
   end
 
   def average_pet_age
-    pets.average(:age).to_i
+    average(:age).to_i
+  end
+
+  def self.pending_applications
+    joins(:applications).where("applications.status = ?", "Pending")
   end
 end

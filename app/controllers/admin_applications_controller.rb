@@ -6,16 +6,27 @@ class AdminApplicationsController < ApplicationController
 
   def show
     @application = Application.find(params[:id])
-    @pet_application = PetApplication.all
+    @pets = Pet.all
+    @pet_application = PetApplication.find(params[:id])
 
-    if @pet_application.status_list_by_application(@application.id).include?('Rejected') &&
-      @pet_application.status_list_by_application(@application.id).exclude?('Pending')
-      @application.update(status: 'Rejected')
-    elsif @pet_application.status_list_by_application(@application.id).include?('Approved') &&
-      @pet_application.status_list_by_application(@application.id).exclude?('Pending')
-      @application.update(status: 'Approved')
+    if params[:status] == "Rejected"
+      @pet_application.update_attribute(:status, "Rejected") &&
+      @application.update_attribute(:status, "Rejected")
+    elsif params[:status] == "Approved"
+      @pet_application.update_attribute(:status, "Approved") &&
+      @application.update_attribute(:status, "Approved") &&
       @application.pets.update_all(adoptable: false)
+    elsif @pets.adoptable == false
+      @pet_application.update_attribute(:status, "Rejected") &&
+      @application.update_attribute(:status, "Rejected")
     end
+  end
+
+
+  private
+
+  def update_params
+    params.permit(:status, :id)
   end
 
 end

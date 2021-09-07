@@ -1,1 +1,21 @@
-<h1><%= @shelter.name %></h1>
+<div class="card">
+  <h3 class="card-header"><%= @shelter.name %></h3>
+  <div class="card-body">
+    <h5 class="card-title">Rank: <%= @shelter.rank %></h5>
+    <h5 class="card-title">City: <%= @shelter.city %></h5>
+    <h5 class="card-title">Number of pets: <%= @shelter.pet_count %></h5><br>
+
+    <%= button_to "List of Pets", "/shelters/#{@shelter.id}/pets", method: :get, class: "sm-btn btn-info" %>
+  </div>
+</div><br>
+
+<div class="card">
+  <h3 class="card-header">Action Required</h3>
+  <div class="card-body">
+    <h5 class="card-title">Pending Pet Applications:</h5>
+    <% @pets.pending_applications.each do |pet| %>
+    <ul><li class="card-title">Name: <%= link_to pet.name, "/admin/applications/#{pet.id}" %></li></ul>
+
+
+   <% end %>
+</div>
