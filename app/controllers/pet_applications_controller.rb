@@ -9,7 +9,7 @@ class PetApplicationsController < ApplicationController
   def create
     @application = Application.find(params[:id])
     @pets = Pet.find(params[:pet_id])
-    @pet_application = PetApplication.create!(application: @application, pet: @pets, status: @application.status)
+    @pet_application = PetApplication.create!(application: @application, pet: @pets)
 
     redirect_to "/applications/#{@application.id}"
   end
