@@ -15,9 +15,9 @@ class Application < ApplicationRecord
     status != "In Progress"
   end
 
-  def self.search_by_name(search)
-    where("name iLIKE ?", "%#{search}")
-  end
+  # def self.search_by_name(search)
+  #   where("name iLIKE ?", "%#{search}")
+  # end
 
   def self.order_by_id
     order(id: :asc)

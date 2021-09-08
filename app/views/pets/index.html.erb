@@ -13,7 +13,7 @@
     You can find <%= pet.name %> at <%= link_to pet.shelter_name, "/shelters/#{pet.shelter.id}" %>!
   </p>
 
-  <%= button_to "Edit", "/pets/#{pet.id}/edit", method: :get, class: "sm-btn btn-secondary" %>
+  <%= button_to "Edit", "/pets/#{pet.id}/edit", method: :patch, class: "sm-btn btn-secondary" %>
   <%= button_to "Delete", "/pets/#{pet.id}", method: :delete, data: { confirm: "Are you sure you want to delete this?" }, class: "sm-btn btn-danger" %>
   <p></p>
 <% end %><br>

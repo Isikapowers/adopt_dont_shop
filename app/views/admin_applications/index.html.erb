@@ -8,6 +8,7 @@
       <th scope="col">Status</th>
       <th scope="col">Date Submitted</th>
       <th scope="col">Last Updated</th>
+      <th scope="col"></th>
       <% @applications.order_by_id.each do |application| %>
     </tr>
   </thead>
@@ -18,6 +19,7 @@
       <td><%= application.status %></td>
       <td><%= application.created_at.to_date %></td>
       <td><%= application.updated_at.to_date %></td>
+      <td><%= button_to "Delete Application", "/admin/applications/#{application.id}", method: :delete, class: "btn btn-danger" %></td>
       <% end %>
     </tr>
   </tbody>

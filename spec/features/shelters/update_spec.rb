@@ -19,14 +19,17 @@ RSpec.describe 'the shelter update' do
       visit "/shelters/#{shelter.id}/edit"
 
       fill_in :name, with: 'Wichita Shelter'
+      fill_in :address, with: "2345 Main Street"
       fill_in :city, with: 'Wichita'
+      fill_in :state, with: "IA"
+      fill_in :zipcode, with: "65774"
       uncheck 'Foster program'
       fill_in :rank, with: 10
       click_button 'Save'
 
-      expect(current_path).to eq("/shelters/#{shelter.id}/edit")
+      expect(current_path).to eq("/shelters")
       expect(page).to have_content("Wichita Shelter")
-      expect(page).to_not have_content("Houston Shelter")
+      expect(page).to_not have_content('Aurora shelter')
     end
   end
 

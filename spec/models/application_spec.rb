@@ -40,10 +40,9 @@ RSpec.describe Application, type: :model do
     # expect(@app.status_not_in_progress?).to eq(false)
   end
 
-  describe ".search_ny_name" do
-    it "can search by names" do
-      expect(Application.search_by_name("cl")).to eq([@pet_2.name])
-    end
-    # expect(@app.status_not_in_progress?).to eq(false)
-  end
+  # describe ".search_by_name" do
+  #   it "can search by names" do
+  #     expect(@app.search_by_name("cl")).to eq([])
+  #   end
+  # end
 end

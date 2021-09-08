@@ -39,7 +39,7 @@
 
 <p>Status: <%= @application.status %></p><br>
 
-<% if @application.pets != [] && @application.status == "In Progress" %>
+<% if @application.pets.count >= 1 && @application.status == "In Progress" %>
   <%= form_with url: "/applications/#{@application.id}", method: :patch, local: true do |f| %>
     <h3><%= f.label :description, 'Why I would make a good owner for the pet(s):' %></h3>
     <p> <%= f.text_field :description %> </p>

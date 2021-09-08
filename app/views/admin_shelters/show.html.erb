@@ -25,9 +25,7 @@
   <h3 class="card-header">Action Required</h3>
   <div class="card-body">
     <h5 class="card-title">Pending Pet Applications:</h5>
-    <% @shelter.pets_pending_applications.each do |pet| %>
-    <ul><li class="card-title">Name: <%= link_to pet.name, "/admin/applications/#{pet.id}" %></li></ul>
-
-
-   <% end %>
+    <% @shelter.pets_pending_applications.each do |pet_app| %>
+    <ul><li class="card-title">Name: <%= link_to pet_app.name, "/admin/applications/#{pet_app.id}" %></li></ul>
+    <% end %>
 </div>

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   get "/admin/applications", to: "admin_applications#index"
   get "/admin/applications/:id", to: "admin_applications#show"
   patch "/admin/applications/:id", to: "admin_applications#show"
-
+  delete "/admin/applications/:id", to: "admin_applications#destroy"
   # resources :applications, :pets, :shelters
 
   get '/shelters', to: 'shelters#index'
@@ -62,7 +62,6 @@ Rails.application.routes.draw do
 
   get "/applications/:application_id/pets", to: "pets#index"
   get "/applications/:application_id/pets/:pet_id", to: "applications#show"
-
 
   get "/applications/:id/new", to: "pet_applications#new"
   post "/applications/:id/new", to: "pet_applications#create"

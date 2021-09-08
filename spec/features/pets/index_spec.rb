@@ -37,8 +37,8 @@ RSpec.describe 'the pets index' do
   it 'only lists adoptable pets' do
     visit "/pets"
 
-    expect(page).to have_content(@pet_1)
-    expect(page).to have_content(@pet_2)
+    expect(page).to have_content(@pet_1.name)
+    expect(page).to have_content(@pet_2.name)
     # expect(page).to have_no_content(pet_3.name)
   end
 
@@ -47,7 +47,7 @@ RSpec.describe 'the pets index' do
 
     expect(page).to have_button("Edit")
 
-    click_link("Edit")
+    click_button "Edit"
 
     expect(page).to have_current_path("/pets/#{@pet_1.id}/edit")
   end
@@ -55,10 +55,7 @@ RSpec.describe 'the pets index' do
   it 'displays a link to delete each pet' do
     visit '/pets'
 
-    expect(page).to have_content("Delete")
-    expect(page).to have_content("Delete")
-
-    click_link "Delete"
+    click_on "Delete"
 
     expect(page).to have_current_path("/pets")
     expect(page).to_not have_content(@pet_1.name)

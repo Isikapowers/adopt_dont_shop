@@ -18,28 +18,28 @@ RSpec.describe 'the shelter show' do
 
     visit "/shelters/#{shelter.id}"
 
-    within ".pet-count" do
-      expect(page).to have_content(shelter.pets.count)
-    end
+    # within ".pet-count" do
+    expect(page).to have_content(shelter.pets.count)
+    # end
   end
 
   it "allows the user to delete a shelter" do
-    shelter = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
+    shelter = Shelter.create(name: 'Aurora shelter', address: "2345 Main Street", city: "Aurora", state: "CO", zipcode: "46352", foster_program: false, rank: 9)
 
     visit "/shelters/#{shelter.id}"
 
-    click_on "Delete"
+    click_button "Delete #{shelter.name}"
 
     expect(page).to have_current_path('/shelters')
     expect(page).to_not have_content(shelter.name)
   end
 
   it 'displays a link to the shelters pets index' do
-    shelter = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: true, rank: 9)
+    shelter = Shelter.create(name: 'Aurora shelter', address: "2345 Main Street", city: "Aurora", state: "CO", zipcode: "46352", foster_program: false, rank: 9)
 
     visit "/shelters/#{shelter.id}"
 
-    click_link "Check Out Our Pets!"
+    click_button "Check Out Our Pets!"
 
     expect(page).to have_current_path("/shelters/#{shelter.id}/pets")
   end

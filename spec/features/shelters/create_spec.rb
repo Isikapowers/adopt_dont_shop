@@ -7,7 +7,10 @@ RSpec.describe 'shelter creation' do
 
       expect(page).to have_content('New Shelter')
       expect(page).to have_field('Name')
+      expect(page).to have_field('Address')
       expect(page).to have_field('City')
+      expect(page).to have_field('State')
+      expect(page).to have_field('Zipcode')
       expect(page).to have_field('Rank')
       expect(page).to have_field('Foster program')
     end
@@ -19,12 +22,16 @@ RSpec.describe 'shelter creation' do
         visit '/shelters/new'
 
         fill_in :name, with: 'Houston Shelter'
+        fill_in :address, with: '123 Main Street'
         fill_in :city, with: 'Houston'
+        fill_in :state, with: 'TX'
+        fill_in :zipcode, with: '86567'
         check 'Foster program'
         fill_in :rank, with: 7
+
         click_button 'Save'
 
-        expect(page).to have_current_path('/shelters/new')
+        expect(page).to have_current_path('/shelters')
         expect(page).to have_content('Houston Shelter')
       end
     end
@@ -36,7 +43,7 @@ RSpec.describe 'shelter creation' do
 
         fill_in 'City', with: 'Houston'
 
-        expect(page).to have_content("Error: Name can't be blank, Rank can't be blank, Rank is not a number")
+        expect(page).to have_content("Error: ")
         expect(page).to have_current_path('/shelters/new')
       end
     end
