@@ -27,15 +27,11 @@ class Pet < ApplicationRecord
     where('age >= ?', age_filter)
   end
 
-  def adoptable_pet_count
-    count
-  end
+  # def adoptable_pet_count
+  #   count
+  # end
 
-  def average_pet_age
-    average(:age).to_i
-  end
-
-  def self.pending_applications
-    joins(:applications).where("applications.status = ?", "Pending")
-  end
+  # def self.pending_applications
+  #   joins(:applications).where("applications.status = ?", "Pending")
+  # end
 end

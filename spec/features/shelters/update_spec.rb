@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'the shelter update' do
   it "shows the shelter edit form" do
-    shelter = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
+    shelter = Shelter.create(name: 'Aurora shelter', address: "2345 Main Street", city: "Aurora", state: "CO", zipcode: "46352", foster_program: false, rank: 9)
 
     visit "/shelters/#{shelter.id}/edit"
 
@@ -14,7 +14,7 @@ RSpec.describe 'the shelter update' do
 
   context "given valid data" do
     it "submits the edit form and updates the shelter" do
-      shelter = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
+      shelter = Shelter.create(name: 'Aurora shelter', address: "2345 Main Street", city: "Aurora", state: "CO", zipcode: "46352", foster_program: false, rank: 9)
 
       visit "/shelters/#{shelter.id}/edit"
 
@@ -24,15 +24,15 @@ RSpec.describe 'the shelter update' do
       fill_in :rank, with: 10
       click_button 'Save'
 
-      expect(page).to have_current_path('/shelters')
-      expect(page).to have_content('Wichita Shelter')
-      expect(page).to_not have_content('Houston Shelter')
+      expect(current_path).to eq("/shelters/#{shelter.id}/edit")
+      expect(page).to have_content("Wichita Shelter")
+      expect(page).to_not have_content("Houston Shelter")
     end
   end
 
   context "given invalid data" do
     it 're-renders the edit form' do
-      shelter = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
+      shelter = Shelter.create(name: 'Aurora shelter', address: "2345 Main Street", city: "Aurora", state: "CO", zipcode: "46352", foster_program: false, rank: 9)
 
       visit "/shelters/#{shelter.id}/edit"
 

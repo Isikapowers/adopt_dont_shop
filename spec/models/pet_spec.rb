@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe Pet, type: :model do
   describe 'relationships' do
     it { should belong_to(:shelter) }
+    it { should have_many(:pet_applications) }
+    it { should have_many(:applications).through(:pet_applications) }
   end
 
   describe 'validations' do
@@ -47,23 +49,11 @@ RSpec.describe Pet, type: :model do
     end
 
     it 'returns pets in alphabetical name order' do
-      expect(Pet.alphabetical_pets).to eq([@pet_3.name, @pet_2.name, @pet_1.name])
+      expect(Pet.alphabetical_pets).to eq([@pet_3, @pet_2, @pet_1])
     end
 
     it 'can filter pets by age' do
       expect(Pet.shelter_pets_filtered_by_age(4)).to eq([@pet_1])
-    end
-
-    it 'can count adoptable pets' do
-      expect(@shelter_1.adoptable_pet_count).to eq(2)
-    end
-
-    it 'can show all adoptable pets' do
-      expect(@shelter_1.adoptable_pets).to eq([@pet_1, @pet_2])
-    end
-
-    it "can get average pet age" do
-      expect(@shelter_1.pets.average_pet_age).to eq(3)
     end
   end
 end

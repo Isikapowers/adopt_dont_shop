@@ -44,6 +44,18 @@ RSpec.describe Shelter, type: :model do
         expect(Shelter.order_by_number_of_pets).to eq([@shelter_1, @shelter_3, @shelter_2])
       end
     end
+
+    describe '#pending applications' do
+      it 'displays only pending applications' do
+        expect(Shelter.pending_applications).to eq([])
+      end
+    end
+
+    describe '#order_by_name_in_reverse' do
+      it 'orders the shelters by names in reverse' do
+        expect(Shelter.order_by_name_in_reverse).to eq([@shelter_2, @shelter_3, @shelter_1])
+      end
+    end
   end
 
   describe 'instance methods' do
@@ -76,5 +88,30 @@ RSpec.describe Shelter, type: :model do
         expect(@shelter_1.average_pet_age).to eq(4)
       end
     end
+
+    describe '.adoptable_pet_count' do
+      it 'can count adoptable pets' do
+        expect(@shelter_1.adoptable_pet_count).to eq(2)
+      end
+    end
+
+    describe '.adoptable_pets' do
+      it 'can show all adoptable pets' do
+        expect(@shelter_1.adoptable_pets).to eq([@pet_2, @pet_4])
+      end
+    end
+
+    describe '.adopted_pet_count' do
+      it "can a count of pets that have been adopted" do
+        expect(@shelter_1.adopted_pet_count).to eq(0)
+      end
+    end
+
+    describe '.pets_pending_applications' do
+      it "can get all pets pending applications" do
+        expect(@shelter_1.pets_pending_applications).to eq([])
+      end
+    end
   end
+
 end

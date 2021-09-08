@@ -24,7 +24,7 @@ RSpec.describe 'shelter creation' do
         fill_in :rank, with: 7
         click_button 'Save'
 
-        expect(page).to have_current_path('/shelters')
+        expect(page).to have_current_path('/shelters/new')
         expect(page).to have_content('Houston Shelter')
       end
     end
