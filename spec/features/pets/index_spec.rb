@@ -37,17 +37,15 @@ RSpec.describe 'the pets index' do
   it 'only lists adoptable pets' do
     visit "/pets"
 
-    expect(page).to have_content(@pet_1.name)
-    expect(page).to have_content(@pet_2.name)
+    expect(page).to have_content(@pet_1)
+    expect(page).to have_content(@pet_2)
     # expect(page).to have_no_content(pet_3.name)
   end
 
   it 'displays a link to edit each pet' do
     visit '/pets'
 
-    expect(page).to have_button("Edit")
-
-    click_button "Edit"
+    click_on "Edit"
 
     expect(page).to have_current_path("/pets/#{@pet_1.id}/edit")
   end

@@ -1,5 +1,4 @@
 <%= form_with url: path, method: method, local: true do |f| %>
   <%= f.hidden_field :status, value: status %>
-  <%= f.hidden_field :pet_id, value: pet_id %>
   <%= f.submit button_text, class: class_name %>
 <% end %>

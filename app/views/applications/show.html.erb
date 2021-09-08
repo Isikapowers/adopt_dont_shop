@@ -1,5 +1,7 @@
 <h2>Application</h2><br>
 
+<%= render "status" %>
+
 <% if @application.status == "In Progress" %>
   <h5>Add Pet(s) to Adopt:</h5>
   <%= form_with url: "/applications/#{@application.id}?search=name", method: :get, local: true do %>
@@ -36,8 +38,6 @@
       <li><%= pet.name %></li>
     </ul>
   <% end %>
-
-<p>Status: <%= @application.status %></p><br>
 
 <% if @application.pets.count >= 1 && @application.status == "In Progress" %>
   <%= form_with url: "/applications/#{@application.id}", method: :patch, local: true do |f| %>

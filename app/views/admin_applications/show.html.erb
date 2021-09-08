@@ -21,8 +21,8 @@
             <% if pet.adoptable == false %>
             <% @application.update_attribute(:status, "Rejected") %>
             <% else %>
-            <%= render partial: "form", locals: { path: "/admin/applications/#{@application.id}?status=approved", method: :patch, status: "Approved", pet_id: pet.id, button_text: "Approve Application", class: "btn btn-info" }  %>
-            <%= render partial: "form", locals: { path: "/admin/applications/#{@application.id}?status=rejected", method: :patch, status: "Rejected", pet_id: pet.id, button_text: "Reject Application", class: "btn btn-warning" } %>
+            <%= render partial: "form", locals: { path: "/admin/applications/#{@application.id}?status=approved", method: :patch, status: "Approved", pet_id: pet.id, button_text: "Approve Application", class_name: "btn btn-info" }  %>
+            <%= render partial: "form", locals: { path: "/admin/applications/#{@application.id}?status=rejected", method: :patch, status: "Rejected", pet_id: pet.id, button_text: "Reject Application", class_name: "btn btn-warning" } %>
             <% end %>
           <% end %>
         </div><br>

@@ -1,0 +1,9 @@
+<% if @application.status == "In Progress" %>
+  <div class="alert alert-secondary" role="alert">Status: <%= @application.status %></div>
+<% elsif @application.status == "Pending" %>
+  <div class="alert alert-warning" role="alert">Status: <%= @application.status %></div>
+<% elsif @application.status == "Approved" %>
+  <div class="alert alert-success" role="alert">Status: <%= @application.status %></div>
+<% elsif @application.status == "Rejected" %>
+  <div class="alert alert-danger" role="alert">Status: <%= @application.status %></div>
+<% end %>

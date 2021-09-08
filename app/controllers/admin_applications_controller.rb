@@ -7,7 +7,7 @@ class AdminApplicationsController < ApplicationController
   def show
     @application = Application.find(params[:id])
     @pets = Pet.all
-    @pet_application = PetApplication.all
+    @pet_application = PetApplication.find(params[:id])
 
     if params[:status] == "rejected"
       @pet_application.update_attribute(:status, "Rejected") && @application.update_attribute(:status, "Rejected")
