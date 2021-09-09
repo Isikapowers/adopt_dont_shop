@@ -53,24 +53,14 @@ RSpec.describe 'the shelters index' do
     expect(@shelter_3.name).to appear_before(@shelter_2.name)
   end
 
-  xit 'has a link to update each shelter' do
+  it 'has a link to update each shelter' do
     visit "/shelters"
 
-    within "#shelter-#{@shelter_1.id}" do
-      expect(page).to have_button("Update")
-    end
-
-    within "#shelter-#{@shelter_2.id}" do
-      expect(page).to have_button("Update")
-    end
-
-    within "#shelter-#{@shelter_3.id}" do
-      expect(page).to have_button("Update")
-    end
+    expect(page).to have_button("Update")
 
     click_on "Update", match: :first
 
-    expect(page).to have_current_path("/shelters/#{@shelter_1.id - 4}/edit")
+    expect(page).to have_current_path("/shelters/#{@shelter_1.id+2}/edit")
   end
 
   it 'has a link to delete each shelter' do
@@ -91,7 +81,7 @@ RSpec.describe 'the shelters index' do
     click_on "Delete", match: :first
 
     expect(page).to have_current_path("/shelters")
-    # expect(page).to_not have_content(@shelter_1.name)
+    expect(page).to_not have_content(@shelter_1)
   end
 
   it 'has a text box to filter results by keyword' do

@@ -4,25 +4,26 @@
   </div>
   <div class="card-body">
     <h5 class="card-title">Application Status:  <%= @application.status %></h5><br>
+
     <h5 class="card-text">Description on why they would make a good owner for the pet(s):</h5>
     <ul><%= @application.description %></ul><br>
 
     <h5>Pets Applying For:</h5><br>
-    <% @application.pets.each do |pet| %>
+    <% @pet_applications.each do |pet_app| %>
       <ul>
-        <li><h5>Name: <%= link_to pet.name, "/pets/#{pet.id}" %></h5>
-          <h5>Adoptable: <%= pet.adoptable %> </h5><br>
-        <div id="pet-<%= pet.id %>">
-          <% if @application.status == "Approved" %>
+        <li><h5>Name: <%= link_to pet_app.pet.name, "/pets/#{pet_app.pet.id}" %></h5>
+          <h5>Adoptable: <%= pet_app.pet.adoptable %> </h5><br>
+        <div id="pet-<%= pet_app.pet.id %>">
+          <% if pet_app.status == "Approved" %>
             <a class="badge badge-success"><h5>Application has been approved.</h5></a>
-          <% elsif @application.status == "Rejected" %>
+          <% elsif pet_app.status == "Rejected" %>
             <a class="badge badge-danger"><h5>Application has been rejected.</h5></a>
           <% else %>
-            <% if pet.adoptable == false %>
+            <% if pet_app.pet.adoptable == false %>
             <% @application.update_attribute(:status, "Rejected") %>
             <% else %>
-            <%= render partial: "form", locals: { path: "/admin/applications/#{@application.id}?status=approved", method: :patch, status: "Approved", pet_id: pet.id, button_text: "Approve Application", class_name: "btn btn-info" }  %>
-            <%= render partial: "form", locals: { path: "/admin/applications/#{@application.id}?status=rejected", method: :patch, status: "Rejected", pet_id: pet.id, button_text: "Reject Application", class_name: "btn btn-warning" } %>
+            <%= render partial: "form", locals: { path: "/admin/applications/#{@application.id}?status=approved", method: :patch, status: "Approved", pet_id: pet_app.pet.id, button_text: "Approve Application", class_name: "btn btn-info" }  %>
+            <%= render partial: "form", locals: { path: "/admin/applications/#{@application.id}?status=rejected", method: :patch, status: "Rejected", pet_id: pet_app.pet.id, button_text: "Reject Application", class_name: "btn btn-warning" } %>
             <% end %>
           <% end %>
         </div><br>

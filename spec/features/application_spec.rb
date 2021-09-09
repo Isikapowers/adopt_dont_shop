@@ -54,9 +54,9 @@ RSpec.describe 'Application' do
     expect(page).to have_link("Veterinary Offices")
   end
 
-  xit "can search" do
-    visit "/"
-
-    expect(Application.search("fido")).to eq("Fido")
-  end
+  # it "can search" do
+  #   visit "/"
+  #
+  #   expect(Application.search("fido")).to eq(["Fido"])
+  # end
 end

@@ -7,14 +7,15 @@ class AdminSheltersController < ApplicationController
 
   def show
     @shelter = Shelter.find(params[:id])
-    @pets = Pet.all
+    @pets = @shelter.pets_pending_applications
     @pet_application = PetApplication.all
 
-    if params[:status] == "rejected"
-      @pet_application.update_attribute(:status, "Rejected") && @application.update_attribute(:status, "Rejected")
-    elsif params[:status] == "approved"
-      @pet_application.update_attribute(:status, "Approved") && @application.update_attribute(:status, "Approved") && @application.pets.update_all(adoptable: false)
-    end
+    #
+    # if params[:status] == "rejected"
+    #   @pet_application.update_attribute(:status, "Rejected") && @application.update_attribute(:status, "Rejected")
+    # elsif params[:status] == "approved"
+    #   @pet_application.update_attribute(:status, "Approved") && @application.update_attribute(:status, "Approved") && @application.pets.update_all(adoptable: false)
+    # end
   end
 
 end

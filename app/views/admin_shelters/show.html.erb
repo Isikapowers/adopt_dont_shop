@@ -25,9 +25,11 @@
   <h3 class="card-header">Action Required</h3>
   <div class="card-body">
     <h5 class="card-title">Pending Pet Applications:</h5>
-    <% @shelter.pets_pending_applications.each do |pet_app| %>
-    <ul><li class="card-title">Name: <%= link_to pet_app.name, "/admin/applications/#{pet_app.id}" %></li></ul>
-    <%= render partial: "form", locals: { path: "/admin/applications/#{pet_app.id}?status=approved", method: :patch, status: "Approved", button_text: "Approve Application", class_name: "btn btn-info" }  %>
-    <%= render partial: "form", locals: { path: "/admin/applications/#{pet_app.id}?status=rejected", method: :patch, status: "Rejected", button_text: "Reject Application", class_name: "btn btn-warning" } %>
+    <% @pets.each do |pet| %>
+     <% pet.applications.each do |app| %>
+      <% if app.status == "Pending" %>
+    <ul><li class="card-title">Name: <%= link_to pet.name, "/admin/applications/#{app.id}" %></li></ul>
+    <% end %>
+    <% end %>
     <% end %>
 </div>

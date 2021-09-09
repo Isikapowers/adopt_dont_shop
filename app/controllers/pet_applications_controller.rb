@@ -29,7 +29,7 @@ class PetApplicationsController < ApplicationController
   private
 
   def pet_application_params
-    params.permit(:application, :pet, :status)
+    params.permit(:application, :pets, :status)
   end
 
 end

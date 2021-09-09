@@ -1,5 +1,5 @@
 <% if @application.status == "In Progress" %>
-  <div class="alert alert-secondary" role="alert">Status: <%= @application.status %></div>
+  <div class="alert alert-secondary" role="alert">Status: <%= @application.status %> -- Please add pet(s) you wish to adopt.</div>
 <% elsif @application.status == "Pending" %>
   <div class="alert alert-warning" role="alert">Status: <%= @application.status %></div>
 <% elsif @application.status == "Approved" %>
