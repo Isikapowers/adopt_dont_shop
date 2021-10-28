@@ -17,18 +17,40 @@ RSpec.describe "Admin Application Show Page" do
                                 applicant_zipcode: "56789",
                                 description: "I already have a dog and would love for him to have friends",
                                 status: "In Progress")
-    @pet_app = PetApplication.create!(application: @dean, pets: @pet_1)
+    @pet_app = PetApplication.create!(application: @dean, pet: @pet_1)
   end
 
-  describe "Approve Application" do
-    it "has a button to approve" do
+  describe "Admin Applications" do
+    it "can display all applications" do
+      visit "admin/applications" do
 
-      visit "/admin/applications/#{@pet_app.id}"
+        expect(page).to have_content(@dean)
+      end
+    end
+
+    it "has a button to approve" do
+      visit "/admin/applications/#{@dean.id}"
 
       click_button "Approve Application"
 
       expect(page).to_not have_button("Approve Application")
-      expect(current_path).to eq("/admin/applications")
+      expect(current_path).to eq("/admin/applications/#{@dean.id}")
+    end
+
+    it "has a button to reject" do
+      visit "/admin/applications/#{@dean.id}"
+
+      click_button "Reject Application"
+
+      expect(page).to_not have_button("Reject Application")
+      expect(current_path).to eq("/admin/applications/#{@dean.id}")
+    end
+
+    it "changes an application status to rejected when adoptable is false" do
+      visit "/admin/applications/#{@dean.id}"
+
+      expect(page).to have_button("Reject Application")
+      expect(current_path).to eq("/admin/applications/#{@dean.id}")
     end
   end
 end
