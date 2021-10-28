@@ -1,11 +1,19 @@
 # Adopt, don't Shop ![Travis CI](https://app.travis-ci.com/Isikapowers/adopt_dont_shop.svg?branch=main)
 
-### Existing database design
-![visual-schema.png](https://i.postimg.cc/0ywZgQ1W/visual-schema.png)
+## Table of contents
+* [Description](#description)
+* [Learning Goals](#learning-goals)
+* [Requirements](#requirements)
+* [Database Schema](#database-schema)
+* [Setup](#setup)
+* [Live App](#live-app)
+* [Tools Used](#tools-used)
+* [Contributors](#contributors)
+
+## Description
+Adopt, don't shop is a Pet Adoption Platform. Users will be able to apply to adopt pets, and Admins will be able to approve or reject applications and see statistics for the Shelters, Pets, and Applications in the system.
 
 ## Learning Goals
-
-In this project, students will build upon the code in this repo to create a Pet Adoption Platform. Users will be able to apply to adopt pets, and Admins will be able to approve or reject applications and see statistics for the Shelters, Pets, and Applications in the system.
 
 * Build out CRUD functionality for a many to many relationship
 * Use ActiveRecord to write queries that join multiple tables of data together
@@ -17,20 +25,13 @@ In this project, students will build upon the code in this repo to create a Pet 
 * Track user stories using GitHub Projects
 * Deploy an application to Heroku
 
+## Database Schema
+![visual-schema.png](https://i.postimg.cc/0ywZgQ1W/visual-schema.png)
 
-## Evaluation
+## Setup
 
-Before your evaluation, choose 2 user stories to present. Try to pick user stories that you think will deliever the highest value in terms of feedback from the instructor. 
-
-During the evaluation, you will present your user story:
-
-* Demonstrate the user story on Heroku (or localhost if the feature is not functional in Production)
-* Show the test(s) for the user story
-* Show all code that implements the user story
-
-# User Stories
-
-## Deploy
+## Live App
+[Heroku Deployment](https://pet-adoption-denver.herokuapp.com/)
 
 ```
 [ ] done
@@ -398,5 +399,5 @@ And I look in the "Action Required" section
 Then next to each pet's name I see a link to the admin application show page where I can accept or reject the pet.
 ```
 
-### Contributors
+## Contributor
 [Isika Powers](https://github.com/Isikapowers)
