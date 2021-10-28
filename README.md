@@ -398,5 +398,5 @@ And I look in the "Action Required" section
 Then next to each pet's name I see a link to the admin application show page where I can accept or reject the pet.
 ```
 
-## Contributors
-[IP](github.com/isikapowers)
+### Contributors
+[Isika Powers](https://github.com/Isikapowers)
