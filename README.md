@@ -31,7 +31,22 @@ Adopt, don't shop is a Pet Adoption Platform. Users will be able to apply to ado
 ## Setup
 
 ## Live App
-[Heroku Deployment](https://pet-adoption-denver.herokuapp.com/)
+[Link to Heroku Deployment](https://pet-adoption-denver.herokuapp.com/)
+
+## Tools Used
+
+| Development    |  Testing             |
+| :-------------:| :-------------------:|
+| Ruby 2.7.2     | SimpleCov            |
+| Rails 5.2.6    | Pry                  |
+| HTML5          | Capybara             |
+| Bootstrap      | ShouldaMatcher       |
+| Atom           | Launchy              |
+| Git            | Orderly              |
+| Github         | RSpec                |
+| Github Project | Travis CI            |
+| Postico        |                      |
+| Heroku         |                      |
 
 ```
 [ ] done
