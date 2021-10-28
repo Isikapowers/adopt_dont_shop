@@ -29,6 +29,13 @@ Adopt, don't shop is a Pet Adoption Platform. Users will be able to apply to ado
 ![visual-schema.png](https://i.postimg.cc/0ywZgQ1W/visual-schema.png)
 
 ## Setup
+* Fork this repository
+* Clone your fork
+* From the command line, install gems and set up your DB:
+    * `bundle install`
+    * `rails db:{create,migrate}`
+* Run the test suite with `bundle exec rspec`.
+* Run your development server with `rails s` to see the app in action.
 
 ## Live App
 [Link to Heroku Deployment](https://pet-adoption-denver.herokuapp.com/)
@@ -48,21 +55,9 @@ Adopt, don't shop is a Pet Adoption Platform. Users will be able to apply to ado
 | Postico        |                      |
 | Heroku         |                      |
 
-```
-[ ] done
+## User Stories
 
-Deploy your application to Heroku
-
-As a visitor of the site
-I will perform all user stories
-By visiting the application on Heroku.
-Localhost is fine for development, but
-the application must be hosted on Heroku.
-
-Use these guides: https://devcenter.heroku.com/articles/getting-started-with-rails5
-```
-
-## Apply for Pet(s)
+### Apply for Pet(s)
 
 Visitors to the site will be able to create applications to adopt pets. An application has many pets. Pets can have many applications.
 
@@ -176,7 +171,7 @@ And I have not added any pets to the application
 Then I do not see a section to submit my application
 ```
 
-## Database Logic Part 1
+### Database Logic Part 1
 
 These stories emphasize key database concepts
 
@@ -227,7 +222,7 @@ Then I see a section for "Shelter's with Pending Applications"
 And in this section I see the name of every shelter that has a pending application
 ```
 
-## Approving Applications
+### Approving Applications
 
 Pets on an application can either be accepted or rejected.
 
@@ -273,7 +268,7 @@ Then I do not see that the pet has been accepted or rejected for that applicatio
 And instead I see buttons to approve or reject the pet for this specific application
 ```
 
-## Completed Applications
+### Completed Applications
 
 Once all pets on an application have been marked either accepted or rejected, then the application is no longer "Pending". If all the pets were accepted, then the application is "Accepted". If one or more pets on the application is rejected, then the entire application is "Rejected".
 
@@ -326,7 +321,7 @@ And instead I see a message that this pet has been approved for adoption
 And I do see a button to reject them
 ```
 
-## Database Logic Part 2
+### Database Logic Part 2
 
 These stories emphasize SQL and ActiveRecord concepts.
 
